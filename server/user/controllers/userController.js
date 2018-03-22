@@ -5,16 +5,26 @@ console.log('* express api controller loaded');
 //get user
 module.exports.getAllUser = function (request, response, next) {
     console.log('userController.getAllUser()');
-    User.find().sort({
-        createdAt: -1,
-    }).exec((err, users) => {
-        if (err) return next(err);
+
+    User.findAll().then(users => {
+        //console.log(users);
         return response.status(200).json({
             success: true,
             message: 'Get all user',
             data: users,
         });
-    });
+    })
+
+    // User.find().sort({
+    //     createdAt: -1,
+    // }).exec((err, users) => {
+    //     if (err) return next(err);
+    //     return response.status(200).json({
+    //         success: true,
+    //         message: 'Get all user',
+    //         data: users,
+    //     });
+    // });
 }
 
 //add new user

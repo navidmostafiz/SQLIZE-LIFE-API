@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
-var mongoose = require('mongoose');
+var Sequelize = require('sequelize');
 var app = express();
 var apiRouting = require('./routes');
 console.log('* express app loaded');
@@ -12,27 +12,68 @@ app.use(bodyParser.json());
 //cross-server
 app.use(cors());
 
-//Set up default mongoose connection
-var mongoDB = 'mongodb://127.0.0.1:27017/userDB';
-mongoose.connect(mongoDB);
-// Get Mongoose to use the global promise library
-mongoose.Promise = global.Promise;
-//Get the default connection
-var db = mongoose.connection;
-
-//Bind connection to error event (to get notification of connection errors)
-db.on('error', function () {
-    console.error('Could not connect to MongoDB. make sure mongod is running!');
-});
-
-mongoose.connection.on('connected', function () {
-    console.info('APP MONGODB@', mongoose.version);
-});
-
-mongoose.connection.on('disconnected', function () {
-    console.info('Mongoose disconnected');
-});
-
 app.use('/api', apiRouting);
 
+// //Sequlizw ORM for MySQL
+// var sequelize = new Sequelize('userDB', 'root', '123456', {
+//     host: 'localhost',
+//     dialect: 'mysql',
+//     operatorsAliases: false,
+//     pool: {
+//         max: 5,
+//         min: 0,
+//         acquire: 30000,
+//         idle: 10000
+//     },
+// });
+
+
+
+// var User = sequelize.define('user', {
+//     _id: {
+//         type: Sequelize.INTEGER,
+//         primaryKey: true,
+//         autoIncrement: true,
+//         defaultValue: Sequelize.UUIDV1
+//     },
+//     firstName: {
+//         type: Sequelize.STRING
+//     },
+//     lastName: {
+//         type: Sequelize.STRING
+//     },
+//     emailAddress: {
+//         type: Sequelize.STRING,
+//         required: [true, 'Email Address is required.'],
+//         unique: true,
+//     },
+//     password: {
+//         type: Sequelize.STRING,
+//         required: [true, 'Password is required.'],
+//     },
+//     status: {
+//         type: Sequelize.ENUM,
+//         values: ['Active', 'Inactive'],
+//         defaultValue: 'Active',
+//     },
+//     role: {
+//         type: Sequelize.ENUM,
+//         values: ['Subscriber', 'Administrator'],
+//         defaultValue: 'Subscriber',
+//     },
+//     createdAt: Sequelize.DATE,
+//     updatedAt: Sequelize.DATE,
+// });
+
+
+// sequelize
+//     .authenticate()
+//     .then(() => {
+//         console.log('Connection has been established successfully.');
+//     })
+//     .catch(err => {
+//         console.error('Unable to connect to the database:', err);
+//     });
+
+// module.exports = User;
 module.exports = app;

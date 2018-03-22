@@ -19,6 +19,8 @@
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "mongodb": "^3.0.4",
-    "mongoose": "^5.0.11"
+    "mongoose": "^5.0.11",
+    "mysql2": "^1.5.3",
+    "sequelize": "^4.37.3"
   }
 }
