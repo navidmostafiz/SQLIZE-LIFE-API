@@ -1,4 +1,4 @@
-# MONGO-LIFE-API
+# SQLIZE-LIFE-API
 NodeJs Express MySQL Sequalize RESTful API
 
 
