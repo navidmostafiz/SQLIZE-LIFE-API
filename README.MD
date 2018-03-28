@@ -60,5 +60,11 @@ VALUES   ( "Hatsuni","Miku","hm@gmail.com", "Active","123456","Administrator","2
 * To start the server and launch api: cmd> npm run start
 
 
+## Vital Information:
+
+* Unique identifier generations:  UUID1 vs UUID4 [128 bit]
+- V1 : guaranteed 2 step uniqueness
+- V4 : faster randomness, (2^128) combinations, practically duplication wont happen.
+
 ## :beetle: Authors
 **Navid Mostafiz**

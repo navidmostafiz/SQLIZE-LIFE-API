@@ -6,98 +6,97 @@ console.log('* express api controller loaded');
 module.exports.getAllUser = function (request, response, next) {
     console.log('userController.getAllUser()');
 
-    User.findAll().then(users => {
-        //console.log(users);
-        return response.status(200).json({
-            success: true,
-            message: 'Get all user',
-            data: users,
+    User.findAll()
+        .then(users => {
+            return response.status(200).json({
+                success: true,
+                message: 'Get all user',
+                data: users,
+            });
+        })
+        .catch(error => {
+            return response.status(403).json({
+                success: false,
+                message: error,
+            });
         });
-    })
-
-    // User.find().sort({
-    //     createdAt: -1,
-    // }).exec((err, users) => {
-    //     if (err) return next(err);
-    //     return response.status(200).json({
-    //         success: true,
-    //         message: 'Get all user',
-    //         data: users,
-    //     });
-    // });
 }
+
 
 //add new user
 module.exports.addUser = function (request, response, next) {
     console.log('userController.addUser');
-    var newUser = new User();
-    Object.assign(newUser, request.body, {
-        password: newUser.generateHash(request.body.password),
-    });
-    console.log('\t new user added with data: ', newUser);
-    newUser.save(function (err, user) {
-        if (err) return next(err);
 
-        return response.status(201).json({
-            success: true,
-            message: 'New User Created!',
-            data: user,
+    User.create(request.body)
+        .then(newUser => {
+            console.log(`New user ${newUser.name}, with id ${newUser._id} has been created.`);
+            return response.status(200).json({
+                success: true,
+                message: `New user ${newUser.name}, with id ${newUser._id} has been created.`,
+                newUser
+            });
+        }).catch(error => {
+            return response.status(403).json({
+                success: false,
+                message: error,
+            });
         });
-    });
 }
 
 //get user by Id
 module.exports.getUserById = function (request, response, next) {
     var userId = request.params._id;
     console.log('userController.getUserById(' + userId + ')');
-    User.findById(ruserId)
-        .exec((err, user) => {
-            if (err) return next(err);
-            console.log('\t user returned: ', user);
+
+    User.findOne({ where: { _id: userId } })
+        .then(users => {
+            //console.log(users);
             return response.status(200).json({
                 success: true,
-                message: 'Get user',
-                data: user,
+                message: 'Get user by Id',
+                data: users,
+            });
+        })
+        .catch(error => {
+            return response.status(403).json({
+                success: false,
+                message: error,
             });
         });
 }
 
 //update user
 module.exports.updateUser = function (request, response, next) {
-    console.log('userController.updateUser(' + request.body.id + request.body.firstName, request.body.lastName + ')');
-    User.findById(request.params._id, function (err, user) {
-        if (err) return next(err);
+    console.log('userController.updateUser(' + request.body._id + request.body.firstName, request.body.lastName + ')');
 
-        user.firstName = request.body.firstName;
-        user.lastName = request.body.lastName;
-        user.emailAddress = request.body.emailAddress;
-        user.status = request.body.status;
+    var newUser = request.body;
 
-        user.save(function (err) {
-            if (err) return next(err);
-
-            return response.status(201).json({
+    User.update(newUser, { where: { _id: request.body._id } })
+        .then(updateUser => {
+            return response.status(200).json({
                 success: true,
-                message: 'Updated user!',
-                data: user
+                message: 'user updated',
+                data: updateUser,
+            });
+        }).catch(error => {
+            return response.status(403).json({
+                success: false,
+                message: error,
             });
         });
-    });
 }
 
 //delete user
 module.exports.deleteUser = function (request, response, next) {
     console.log('userController.deleteUser: not functional');
-    // var userId = request.params._id;
+    var userId = request.params._id;
 
-    // //create new user list without the elemnt that has matching id
-    // var tempUsers = [];
-    // users.forEach(function (user) {
-    //     if (user.id != userId) {
-    //         tempUsers.push(user);
-    //     };
-    // });
-    // users = tempUsers;
-
-    // return response.status(200).json({ message: 'user deleted' });
+    User.destory({ where: { _id: userId } })
+        .then(deletedUser => { console.log('user deleted', deletedUser); })
+        .catch(error => {
+            return response.status(403).json({
+                success: false,
+                message: error,
+            });
+        });
 }
