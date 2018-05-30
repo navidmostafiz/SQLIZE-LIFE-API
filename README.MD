@@ -4,13 +4,13 @@ NodeJs Express MySQL Sequalize RESTful API
 ## :beetle: The Stack
 | FW/Lib         | Description                                        |
 | -------------- | -------------------------------------------------- |
-| * **NodeJs**       | [download NodeJs](https://nodejs.org/en/download/) |
-| * Node Express | Restful API                                        |
-| * MySQL      | relational DB                |
-| * Sequalize     | ORM for MySQL                                    |
-| * MySQL Workbench       | APMongo visual [for developer use]I                |
-| * JWT          | (JSON Web Token) - local Auth                      |
-| * BCrypt       | hashing encryption for password                    |
+| :large_orange_diamond: **NodeJs**       | [download NodeJs](https://nodejs.org/en/download/) |
+| :large_orange_diamond: Node Express | Restful API                                        |
+| :large_orange_diamond: MySQL      | relational DB                |
+| :large_orange_diamond: Sequalize     | ORM for MySQL                                    |
+| :large_orange_diamond: MySQL Workbench       | APMongo visual [for developer use]I                |
+| :large_orange_diamond: JWT          | (JSON Web Token) - local Auth                      |
+| :large_orange_diamond: BCrypt       | hashing encryption for password                    |
 
 
 ## :beetle: INSTALLATIONS
