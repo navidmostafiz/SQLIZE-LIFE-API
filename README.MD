@@ -14,7 +14,7 @@ NodeJs Express MySQL Sequalize RESTful API
 
 
 ## :beetle: INSTALLATIONS
-### :beetle: Install MySQL server: on ubuntu 16.04 LTS
+#### Install MySQL server: on ubuntu 16.04 LTS
 ```sh
 cmd> sudo apt-get update //updates the list of available packages and their versions
 cmd> sudo apt-get upgrade //installs newer versions of the packages in the system
@@ -55,17 +55,21 @@ VALUES   ( "Hatsuni","Miku","hm@gmail.com", "Active","123456","Administrator","2
 ```
 
 ## :beetle: How to clone this project?
-* Goto empty project folder
-* cmd> git clone https://github.com/navidmostafiz/SQLIZE-LIFE-API.git
-* cmd> npm install
-
-
-## :beetle: Commands
+#### Goto empty project folder and run the following commands:
 ```sh
-* cmd> npm install --save express
-* cmd> npm install --save sequelize
-* cmd> npm install --save mysql2
-* To start the server and launch api: cmd> npm run start
+cmd> git clone https://github.com/navidmostafiz/SQLIZE-LIFE-API.git
+cmd> npm install
+```
+#### To start the server and launch app, run the following commands:
+```sh
+cmd> npm run start
+```
+
+## :beetle: Useful Commands
+```sh
+cmd> npm install --save express
+cmd> npm install --save sequelize
+cmd> npm install --save mysql2
 ```
 
 ## :beetle: Other Information:
